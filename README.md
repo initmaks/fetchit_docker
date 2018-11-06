@@ -1,6 +1,6 @@
 ## Docker container with pure Ubuntu 14.04 + ROS Indigo + Fetch Gazebo setup + VNC & openbox
 
-This repository contains a Dockerfile for building ROS and Sawyer packages on top of pure Ubuntu 14.04 docker image (with openbox window manager), which runs in a headless mode, and is viewed through the vnc.
+This repository contains a Dockerfile for building ROS and Fetch packages on top of pure Ubuntu 14.04 docker image (with openbox window manager), which runs in a headless mode, and is viewed through the vnc.
 
 ## Building manually
 
