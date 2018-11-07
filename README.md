@@ -7,7 +7,7 @@ This repository contains a Dockerfile for building ROS and Fetch packages on top
 To build manually, pull the repo:
 
 ```bash
-git pull https://github.com/mksmsrkn/fetchit_docker
+git pull https://github.com/mksmsrkn/fetchit_docker.git
 cd fetchit_docker
 chmod u+x bootstrap.sh
 docker build -t fetchit_docker .
