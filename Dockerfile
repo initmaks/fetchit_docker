@@ -65,6 +65,15 @@ RUN cd /home/catkin_ws/src && git clone https://github.com/BerkeleyAutomation/pe
 
 # Install GQ-CNN itself (https://berkeleyautomation.github.io/gqcnn/install/install.html#berkeleyautomation-packages)
 RUN cd /home/catkin_ws/src && git clone https://github.com/BerkeleyAutomation/gqcnn.git && \
+	cd /home/catkin_ws/src/gqcnn/ && pip install -r requirements.txt --ignore-installed && \
 	cd /home/catkin_ws && source /opt/ros/indigo/setup.bash && catkin_make
+
+# Build the image sudo docker build -t fetchit_docker_gqcnn .
+# Download the pretrained network (from https://berkeley.app.box.com/s/szbchyt3tou9e4ct6dz8c5v99vhx0s84/folder/27403942113) to <model>
+# Run the container with sudo docker run -d -p 5900:5900 -v <model>:/home/catkin_ws/src/gqcnn/models fetchit_docker_gqcnn
+# Connect with VNC (might have to wait a few minutes)
+# Within the container you got to source the catkin_ws (cd /home/catkin_ws/ && source devel/setup.bash)
+# Adapt cfg file in src/gqcnn/cfg/examples/policy.yaml --> change image_dir to data/rgbd/multiple_objects, type to virtual and gqcnn_model to /home/catkin_ws/src/gqcnn/models
+# Run demo from /home/catkin_ws/src/gqcnn with python examples/policy.py --config_filename cfg/examples/policy.yaml
  
 
