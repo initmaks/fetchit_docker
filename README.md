@@ -36,7 +36,7 @@ After connecting you will see a black screen, you can make a right click to see 
 
 ## GQCNN Demo
 1. Build the image with "docker build -t fetchit_docker_gqcnn ."
-2. Download the pretrained network (from [https://berkeley.app.box.com/s/szbchyt3tou9e4ct6dz8c5v99vhx0s84/folder/27403942113](URL)) to <model>
+2. Download the pretrained network (from [URL](https://berkeley.app.box.com/s/szbchyt3tou9e4ct6dz8c5v99vhx0s84/folder/27403942113)) to <model>
 3. Run the container with "docker run -d -p 5900:5900 -v <model>:/home/catkin_ws/src/gqcnn/models fetchit_docker_gqcnn"
 4. Connect with VNC on localhost:5900 (might have to wait a few minutes)
 5. Within the container you got to source the catkin_ws ("cd /home/catkin_ws/ && source devel/setup.bash")
