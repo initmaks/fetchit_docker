@@ -9,7 +9,6 @@ To build manually, pull the repo:
 ```bash
 git pull https://github.com/mksmsrkn/fetchit_docker.git
 cd fetchit_docker
-chmod u+x bootstrap.sh
 docker build -t fetchit_docker .
 ```
 
@@ -36,15 +35,12 @@ After connecting you will see a black screen, you can make a right click to see 
 
 ## GQCNN Demo
 1. Build the image with "docker build -t fetchit_docker_gqcnn ."
-2. Download the pretrained network (from [URL](https://berkeley.app.box.com/s/szbchyt3tou9e4ct6dz8c5v99vhx0s84/folder/27403942113)) to <model>
-3. Run the container with "docker run -d -p 5900:5900 -v <model>:/home/catkin_ws/src/gqcnn/models fetchit_docker_gqcnn"
+2. Download the pretrained network (from [URL](https://berkeley.app.box.com/s/szbchyt3tou9e4ct6dz8c5v99vhx0s84/folder/27403942113)) to `model/`
+3. Run the container with `docker run -d -p 5900:5900 -v $(pwd)/model:/root/catkin_ws/src/gqcnn/models fetchit_docker_gqcnn`
 4. Connect with VNC on localhost:5900 (might have to wait a few minutes)
-5. Within the container you got to source the catkin_ws ("cd /home/catkin_ws/ && source devel/setup.bash")
-6. Change the following in the config file in src/gqcnn/cfg/examples/policy.yaml:
-    * image_dir to data/rgbd/multiple_objects
-    * type to virtual 
-    * gqcnn_model to /home/catkin_ws/src/gqcnn/models
-7. Run demo from /home/catkin_ws/src/gqcnn with "python examples/policy.py --config_filename cfg/examples/policy.yaml"
+5. Run `./setup.sh` to fix the yaml config file
+6. Within the container you got to source the catkin_ws (`cd /home/catkin_ws/ && source devel/setup.bash`)
+7. Run demo from `/home/catkin_ws/src/gqcnn` with `python examples/policy.py --config_filename cfg/examples/policy.yaml`
 
 ## Remarks
 You can follow the steps from the Gazebo website now to run the simulator - [http://docs.fetchrobotics.com/gazebo.html#starting-the-simulator](http://docs.fetchrobotics.com/gazebo.html#starting-the-simulator).

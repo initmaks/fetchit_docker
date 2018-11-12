@@ -48,32 +48,32 @@ RUN apt-get update && \
 
 # Newer version of tornado incompatiple with 14.04
 RUN pip install tornado==4.* numpy scipy matplotlib tensorflow opencv-python scikit-image scikit-learn pillow 
-RUN mkdir -p /home/catkin_ws/src
+RUN mkdir -p /root/catkin_ws/src
 
 SHELL ["/bin/bash", "-c"]	# Change to bash shell for ros stuff
-RUN source /opt/ros/indigo/setup.bash && cd /home/catkin_ws && catkin_make
+RUN source /opt/ros/indigo/setup.bash && cd /root/catkin_ws && catkin_make
 
 # Install Autolab_core (https://berkeleyautomation.github.io/autolab_core/install/install.html)
-RUN pip install -U setuptools && cd /home/catkin_ws/src && git clone https://github.com/BerkeleyAutomation/autolab_core.git && \
+RUN pip install -U setuptools && cd /root/catkin_ws/src && git clone https://github.com/BerkeleyAutomation/autolab_core.git && \
 	cd autolab_core && python setup.py install && \
-	cd /home/catkin_ws/ && source /opt/ros/indigo/setup.bash && catkin_make && source devel/setup.bash
+	cd /root/catkin_ws/ && source /opt/ros/indigo/setup.bash && catkin_make && source devel/setup.bash
 
 # Install Autolab_perception (https://berkeleyautomation.github.io/perception/install/install.html)
-RUN cd /home/catkin_ws/src && git clone https://github.com/BerkeleyAutomation/perception.git && \
+RUN cd /root/catkin_ws/src && git clone https://github.com/BerkeleyAutomation/perception.git && \
 	cd perception/ && pip install -e . && \
-	cd /home/catkin_ws/ && source /opt/ros/indigo/setup.bash && catkin_make
+	cd /root/catkin_ws/ && source /opt/ros/indigo/setup.bash && catkin_make
 
 # Install GQ-CNN itself (https://berkeleyautomation.github.io/gqcnn/install/install.html#berkeleyautomation-packages)
-RUN cd /home/catkin_ws/src && git clone https://github.com/BerkeleyAutomation/gqcnn.git && \
-	cd /home/catkin_ws/src/gqcnn/ && pip install -r requirements.txt --ignore-installed && \
-	cd /home/catkin_ws && source /opt/ros/indigo/setup.bash && catkin_make
+RUN cd /root/catkin_ws/src && git clone https://github.com/BerkeleyAutomation/gqcnn.git && \
+	cd /root/catkin_ws/src/gqcnn/ && pip install -r requirements.txt --ignore-installed && \
+	cd /root/catkin_ws && source /opt/ros/indigo/setup.bash && catkin_make
 
 # Build the image sudo docker build -t fetchit_docker_gqcnn .
-# Download the pretrained network (from https://berkeley.app.box.com/s/szbchyt3tou9e4ct6dz8c5v99vhx0s84/folder/27403942113) to <model>
-# Run the container with sudo docker run -d -p 5900:5900 -v <model>:/home/catkin_ws/src/gqcnn/models fetchit_docker_gqcnn
+# Download the pretrained network (from https://berkeley.app.box.com/s/szbchyt3tou9e4ct6dz8c5v99vhx0s84/folder/27403942113) toa local folder `model/`
+# Run the container with sudo docker run -d -p 5900:5900 -v $(pwd)/model:/root/catkin_ws/src/gqcnn/models fetchit_docker_gqcnn
 # Connect with VNC (might have to wait a few minutes)
-# Within the container you got to source the catkin_ws (cd /home/catkin_ws/ && source devel/setup.bash)
-# Adapt cfg file in src/gqcnn/cfg/examples/policy.yaml --> change image_dir to data/rgbd/multiple_objects, type to virtual and gqcnn_model to /home/catkin_ws/src/gqcnn/models
-# Run demo from /home/catkin_ws/src/gqcnn with python examples/policy.py --config_filename cfg/examples/policy.yaml
- 
+# Within the container you got to source the catkin_ws (cd /root/catkin_ws/ && source devel/setup.bash)
+# Run setup.sh
+# Run demo from `/root/catkin_ws/src/gqcnn` with `python examples/policy.py --config_filename cfg/examples/policy.yaml`
 
+COPY setup.sh /root/
