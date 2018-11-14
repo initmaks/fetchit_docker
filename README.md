@@ -42,5 +42,9 @@ After connecting you will see a black screen, you can make a right click to see 
 6. Within the container you got to source the catkin_ws (`cd catkin_ws/ && source devel/setup.bash`)
 7. Run demo from `catkin_ws/src/gqcnn` with `python examples/policy.py --config_filename cfg/examples/policy.yaml`
 
+## Gazebo world package
+1. Make sure you clone `https://github.com/mksmsrkn/fetchit_world.git` into a parent directory.
+2. Follow the [https://github.com/mksmsrkn/fetchit_world/blob/master/README.md](https://github.com/mksmsrkn/fetchit_world/blob/master/README.md)
+
 ## Remarks
 You can follow the steps from the Gazebo website now to run the simulator - [http://docs.fetchrobotics.com/gazebo.html#starting-the-simulator](http://docs.fetchrobotics.com/gazebo.html#starting-the-simulator).
