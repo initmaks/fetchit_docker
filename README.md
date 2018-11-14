@@ -39,8 +39,8 @@ After connecting you will see a black screen, you can make a right click to see 
 3. Run the container with `docker run -d -p 5900:5900 -v $(pwd)/model:/root/catkin_ws/src/gqcnn/models fetchit_docker_gqcnn`
 4. Connect with VNC on localhost:5900 (might have to wait a few minutes)
 5. Run `./setup.sh` to fix the yaml config file
-6. Within the container you got to source the catkin_ws (`cd /home/catkin_ws/ && source devel/setup.bash`)
-7. Run demo from `/home/catkin_ws/src/gqcnn` with `python examples/policy.py --config_filename cfg/examples/policy.yaml`
+6. Within the container you got to source the catkin_ws (`cd catkin_ws/ && source devel/setup.bash`)
+7. Run demo from `catkin_ws/src/gqcnn` with `python examples/policy.py --config_filename cfg/examples/policy.yaml`
 
 ## Remarks
 You can follow the steps from the Gazebo website now to run the simulator - [http://docs.fetchrobotics.com/gazebo.html#starting-the-simulator](http://docs.fetchrobotics.com/gazebo.html#starting-the-simulator).
